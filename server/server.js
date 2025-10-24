@@ -14,9 +14,12 @@ const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*'} });
 
 setupGameSessionSocket(io);
-
+const allowedOrigins = [
+  'http://localhost:3000',
+  process.env.FRONTEND_URL
+]
 app.use(cors({
-  origin: "https://guessinggame-pi.vercel.app/",
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
